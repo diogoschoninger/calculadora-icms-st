@@ -26,5 +26,4 @@ function createProduct() {
 }
 
 function addProduct() {
-  divRoot.appendChild(createProduct());
 }
