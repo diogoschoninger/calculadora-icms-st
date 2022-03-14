@@ -31,7 +31,7 @@ function addProductForm() {
 }
 
 function calculate() {
-  var icmsProprio = 0;
+  var icmsARecolher = 0;
   var icmsST = 0;
   var valorTotalProdutos = 0;
 
@@ -43,17 +43,13 @@ function calculate() {
     valueProduct = Number.parseFloat(valueProduct.replace(',', '.'));
     aliqInt = Number.parseFloat(aliqInt.replace(',', '.'));
     mva = Number.parseFloat(mva.replace(',', '.'));
-    
-    console.log(valueProduct);
-    console.log(aliqInt);
-    console.log(mva);
 
     valorTotalProdutos += valueProduct;
-    icmsProprio += valueProduct * (aliqInt / 100);
+    icmsARecolher += valueProduct * (aliqInt / 100);
     icmsST += (valueProduct + (valueProduct * (mva / 100))) * (aliqInt / 100);
   }
 
-  var icmsARecolher = icmsST - icmsProprio;
+  var icmsProprio = icmsST - icmsARecolher;
 
   numProd = 1;
 
