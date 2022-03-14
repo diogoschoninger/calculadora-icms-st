@@ -55,10 +55,22 @@ function calculate() {
 
   divRoot.innerHTML = `
     <ul>
-      <li>Valor total dos produtos: ${valorTotalProdutos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</li>
-      <li>Valor ICMS-ST: ${icmsST.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</li>
-      <li>Valor ICMS Próprio: ${icmsProprio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</li>
-      <li>Valor ICMS a recolher: ${icmsARecolher.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</li>
+      <li>
+        <span>Valor total dos produtos:</span>
+        <span>${valorTotalProdutos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+      </li>
+      <li>
+        <span>Valor ICMS-ST:</span>
+        <span>${icmsST.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+      </li>
+      <li>
+        <span>Valor ICMS Próprio:</span>
+        <span>${icmsProprio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+      </li>
+      <li>
+        <span>Valor ICMS a recolher:</span>
+        <span>${icmsARecolher.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+      </li>
     </ul>
   `;
 }

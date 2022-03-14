@@ -12,7 +12,7 @@
   padding: 0.5rem;
 }
 
-h1, #root > div, button:not(:last-child) {
+h1, #root > div, #root ul, button:not(:last-child) {
   margin-bottom: 1rem;
 }
 
@@ -20,9 +20,9 @@ h1 {
   text-align: center;
 }
 
-#root > div {
+#root > div, #root ul {
   padding: .5rem;
-  border: 1px solid rgb(115, 115, 115);
+  border: 1px solid rgb(190, 190, 190);
   border-radius: 0.3rem;
 }
 
@@ -44,16 +44,36 @@ h1 {
   line-height: 33px;
 }
 
+#root ul {
+  list-style: none;
+}
+
+#root ul li {
+  display: flex;
+  justify-content: space-between;
+}
+
+#root ul li:not(:last-child) {
+  margin-bottom: .5rem;
+}
+
 button {
   padding: 0.5rem;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 0.3rem;
 }
 
 input {
   padding: 0.5rem;
-  border: 1px solid rgb(115, 115, 115);
+  border: 1px solid rgb(190, 190, 190);
   border-radius: 0.3rem;
+  font-size: 0.9rem;
+}
+
+input:focus {
+  outline: 1px solid rgb(190, 190, 190);;
 }
 
 body button:last-child {
