@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 0.5rem;
+}
+
+h1, #root > div, button:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+#root > div {
+  padding: .5rem;
+  border: 1px solid rgb(115, 115, 115);
+  border-radius: 0.3rem;
+}
+
+#root > div {
+  
+}
+
+#root div h2 {
+  margin-bottom: 0.5rem;
+}
+
+#root div div {
+  margin: 0 0 .5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+#root div div label {
+  line-height: 33px;
+}
+
+button {
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+input {
+  padding: 0.5rem;
+  border: 1px solid rgb(115, 115, 115);
+  border-radius: 0.3rem;
+}
+
+body button:last-child {
+  width: 100%;
+}

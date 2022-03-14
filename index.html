@@ -6,16 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Calcular ICMS-ST</title>
+
+  <link rel="stylesheet" href="./style.css"/>
 </head>
 <body>
-  <h1>Cálculo de ICMS-ST</h1>
+  <div class="container">
+    <h1>Cálculo de ICMS-ST</h1>
 
-  <button onclick='addProductForm()'>Adicionar produto</button>
+    <button onclick='addProductForm()'>Adicionar produto</button>
+    
+    <div id="root"></div>
+
+    <button onclick="calculate()">Calcular</button>
+  </div>
   
-  <div id="root"></div>
-
-  <button onclick="calculate()">Calcular</button>
-
   <script src="./script.js"></script>
 </body>
 </html>
