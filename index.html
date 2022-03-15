@@ -13,11 +13,32 @@
   <div class="container">
     <h1>Cálculo de ICMS-ST</h1>
 
-    <button onclick='addProductForm()'>Adicionar produto</button>
+    <h2>Escolha uma opção:</h2>
+    <div>
+      <input
+        type="radio"
+        id="radioCliente"
+        name="opcao_calculo"
+        value="cliente"
+        checked
+      />
+      <label for="radioCliente">Preciso cobrar ICMS do meu cliente</label>
+    </div>
+    <div>
+      <input
+        type="radio"
+        id="radioFornecedor"
+        name="opcao_calculo"
+        value="fornecedor"
+      />
+      <label for="radioFornecedor">Preciso cobrar ICMS do meu fornecedor</label>
+    </div>
+
+    <button id="btnAddProduct" onclick="addProduct()">Adicionar produto</button>
     
     <div id="root"></div>
 
-    <button onclick="calculate()">Calcular</button>
+    <button id="btnCalculate" onclick="calculate()">Calcular</button>
   </div>
   
   <script src="./script.js"></script>
