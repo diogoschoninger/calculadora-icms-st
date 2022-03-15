@@ -1,5 +1,11 @@
 const divRoot = document.getElementById('root');
+const btnAddProduct = document.getElementById('btnAddProduct');
+const btnCalculate = document.createElement('button');
+const divContainer = document.querySelector('div.container');
 var numProd = 1;
+
+btnCalculate.id = 'btnCalculate';
+btnCalculate.innerHTML = 'Calcular';
 
 function createProductForm() {
   var html = document.createElement('div');
@@ -7,12 +13,12 @@ function createProductForm() {
     <h2>Produto ${numProd}</h2>
 
     <div>
-      <label for='valueProduct${numProd}'>Valor do produto ${numProd}</label>
-      <input id='valueProduct${numProd}'/>
+      <label for='valorProduto${numProd}'>Valor total do produto ${numProd}</label>
+      <input id='valorProduto${numProd}'/>
     </div>
     <div>
-      <label for='aliqInt${numProd}'>Alíquota interna do produto ${numProd}</label>
-      <input id='aliqInt${numProd}'/>
+      <label for='aliquota${numProd}'>Alíquota interna do produto ${numProd}</label>
+      <input id='aliquota${numProd}'/>
     </div>
     <div>
       <label for='mva${numProd}'>MVA do produto ${numProd}</label>
@@ -25,31 +31,65 @@ function createProductForm() {
   return html;
 }
 
-function addProductForm() {
-  if (numProd === 1) divRoot.innerHTML = '';
+function addProduct() {
+  if (numProd === 1) {
+    divRoot.innerHTML = '';
+    divContainer.appendChild(btnCalculate);
+    btnAddProduct.innerHTML = 'Adicionar produto'
+  }
   divRoot.appendChild(createProductForm());
 }
 
-function calculate() {
-  var icmsARecolher = 0;
-  var icmsST = 0;
-  var valorTotalProdutos = 0;
+btnCalculate.onclick = () => {
+  btnAddProduct.innerHTML = 'Calcular novos produtos';
+  var opcaoCalculo = document.getElementById('radioCliente').checked ? "cliente" : "fornecedor";
+
+  var valorProdutosTotal = 0;
+  var baseICMSTotal = 0;
+  var valorICMSTotal = 0;
+  var ICMSProprioTotal = 0;
+  var valorARecolherTotal = 0;
+
+  var valorProdutos = 0;
+  var baseICMS = 0;
+  var valorICMS = 0;
+  var ICMSProprio = 0;
+  var valorARecolher = 0;
 
   for (let i = 1; i < numProd; i++) {
-    let valueProduct = document.getElementById(`valueProduct${i}`).value;
-    let aliqInt = document.getElementById(`aliqInt${i}`).value;
-    let mva = document.getElementById(`mva${i}`).value;
+    let valorProduto = Number.parseFloat(
+      document.getElementById(`valorProduto${i}`)
+      .value
+      .replace(',', '.')
+    );
+    let aliquota = Number.parseFloat(
+      document.getElementById(`aliquota${i}`)
+      .value
+      .replace(',', '.')
+    );
+    let mva = Number.parseFloat(
+      document.getElementById(`mva${i}`)
+      .value
+      .replace(',', '.')
+    );
 
-    valueProduct = Number.parseFloat(valueProduct.replace(',', '.'));
-    aliqInt = Number.parseFloat(aliqInt.replace(',', '.'));
-    mva = Number.parseFloat(mva.replace(',', '.'));
+    baseICMS = valorProduto * (1 + (mva/100));
+    valorICMS = baseICMS * (aliquota/100);
 
-    valorTotalProdutos += valueProduct;
-    icmsARecolher += valueProduct * (aliqInt / 100);
-    icmsST += (valueProduct + (valueProduct * (mva / 100))) * (aliqInt / 100);
+    if (opcaoCalculo === 'cliente') {
+      ICMSProprio = valorProduto * (aliquota/100);
+      valorARecolher = valorICMS - ICMSProprio;
+    } else if (opcaoCalculo === 'fornecedor') {
+      valorARecolher = valorProduto * (aliquota/100);
+      ICMSProprio = valorICMS - valorARecolher;
+    }
+
+    valorProdutosTotal += valorProduto;
+    baseICMSTotal += baseICMS;
+    valorICMSTotal += valorICMS;
+    ICMSProprioTotal += ICMSProprio;
+    valorARecolherTotal += valorARecolher
   }
-
-  var icmsProprio = icmsST - icmsARecolher;
 
   numProd = 1;
 
@@ -57,19 +97,23 @@ function calculate() {
     <ul>
       <li>
         <span>Valor total dos produtos:</span>
-        <span>${valorTotalProdutos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+        <span>${valorProdutosTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
       </li>
       <li>
-        <span>Valor ICMS-ST:</span>
-        <span>${icmsST.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+        <span>Base ICMS:</span>
+        <span>${baseICMSTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+      </li>
+      <li>
+        <span>Valor ICMS:</span>
+        <span>${valorICMSTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
       </li>
       <li>
         <span>Valor ICMS Próprio:</span>
-        <span>${icmsProprio.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+        <span>${ICMSProprioTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
       </li>
       <li>
-        <span>Valor ICMS a recolher:</span>
-        <span>${icmsARecolher.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+        <span>Valor ICMS a recolher do ${opcaoCalculo}:</span>
+        <span>${valorARecolherTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
       </li>
     </ul>
   `;
