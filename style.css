@@ -2,76 +2,65 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
   max-width: 500px;
   margin: auto;
-  padding: 0.5rem;
+  padding: .5rem;
+  padding-bottom: 0;
 }
 
-h1, #root > div, #root ul, button:not(:last-child) {
+.container h1 {
+  text-align: center;
   margin-bottom: 1rem;
 }
 
-h1 {
-  text-align: center;
-}
-
-#root > div, #root ul {
-  padding: .5rem;
-  border: 1px solid rgb(190, 190, 190);
-  border-radius: 0.3rem;
-}
-
-#root div h2 {
-  margin-bottom: 0.5rem;
-}
-
-#root div div {
-  margin: 0 0 .5rem 1rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-#root div div label {
-  line-height: 33px;
-}
-
-#root ul {
-  list-style: none;
-}
-
-#root ul li {
-  display: flex;
-  justify-content: space-between;
-}
-
-#root ul li:not(:last-child) {
+h2,
+.input-group,
+.input-group div:not(:last-child),
+button,
+.form-produto,
+.form-produto div:not(:last-child),
+.result,
+.result li:not(:last-child) {
   margin-bottom: .5rem;
 }
 
-button {
-  padding: 0.5rem;
-  cursor: pointer;
-  font-size: 1rem;
-  border: 1px solid rgb(190, 190, 190);
-  border-radius: 0.3rem;
-}
+label, input[type="radio"] { cursor: pointer }
 
 input {
-  padding: 0.5rem;
-  border: 1px solid rgb(190, 190, 190);
-  border-radius: 0.3rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
-input:focus {
-  outline: 1px solid rgb(190, 190, 190);;
+button {
+  padding: .5rem;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
-body button:last-child {
-  width: 100%;
+.form-produto div,
+.result li {
+  display: flex;
+  justify-content: space-between;
 }
+
+.form-produto div input {
+  padding: 0 .5rem;
+  height: 2rem;
+  border: 1px solid black;
+  border-radius: .3rem;
+  outline: 0;
+}
+
+.form-produto div input:focus { outline: 1px solid black }
+
+.form-produto div label { line-height: 2rem }
+
+.result {
+  list-style: none;
+  padding: 0 2rem;
+}
+
+#btnCalculate { width: 100% }

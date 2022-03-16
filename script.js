@@ -9,6 +9,7 @@ btnCalculate.innerHTML = 'Calcular';
 
 function createProductForm() {
   var html = document.createElement('div');
+  html.className = 'form-produto'
   html.innerHTML = `
     <h2>Produto ${numProd}</h2>
 
@@ -94,7 +95,7 @@ btnCalculate.onclick = () => {
   numProd = 1;
 
   divRoot.innerHTML = `
-    <ul>
+    <ul class="result">
       <li>
         <span>Valor total dos produtos:</span>
         <span>${valorProdutosTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
