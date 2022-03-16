@@ -14,8 +14,8 @@ function createProductForm() {
     <h2>Produto ${numProd}</h2>
 
     <div>
-      <label for='valorProduto${numProd}'>Valor total do produto ${numProd}</label>
-      <input id='valorProduto${numProd}'/>
+      <label for='bcProduto${numProd}'>Base de cálculo do produto ${numProd}</label>
+      <input id='bcProduto${numProd}'/>
     </div>
     <div>
       <label for='aliquota${numProd}'>Alíquota interna do produto ${numProd}</label>
@@ -45,21 +45,20 @@ btnCalculate.onclick = () => {
   btnAddProduct.innerHTML = 'Calcular novos produtos';
   var opcaoCalculo = document.getElementById('radioCliente').checked ? "cliente" : "fornecedor";
 
-  var valorProdutosTotal = 0;
+  var bcProdutosTotal = 0;
   var baseICMSTotal = 0;
   var valorICMSTotal = 0;
   var ICMSProprioTotal = 0;
   var valorARecolherTotal = 0;
 
-  var valorProdutos = 0;
   var baseICMS = 0;
   var valorICMS = 0;
   var ICMSProprio = 0;
   var valorARecolher = 0;
 
   for (let i = 1; i < numProd; i++) {
-    let valorProduto = Number.parseFloat(
-      document.getElementById(`valorProduto${i}`)
+    let bcProduto = Number.parseFloat(
+      document.getElementById(`bcProduto${i}`)
       .value
       .replace(',', '.')
     );
@@ -74,18 +73,18 @@ btnCalculate.onclick = () => {
       .replace(',', '.')
     );
 
-    baseICMS = valorProduto * (1 + (mva/100));
+    baseICMS = bcProduto * (1 + (mva/100));
     valorICMS = baseICMS * (aliquota/100);
 
     if (opcaoCalculo === 'cliente') {
-      ICMSProprio = valorProduto * (aliquota/100);
+      ICMSProprio = bcProduto * (aliquota/100);
       valorARecolher = valorICMS - ICMSProprio;
     } else if (opcaoCalculo === 'fornecedor') {
-      valorARecolher = valorProduto * (aliquota/100);
+      valorARecolher = bcProduto * (aliquota/100);
       ICMSProprio = valorICMS - valorARecolher;
     }
 
-    valorProdutosTotal += valorProduto;
+    bcProdutosTotal += bcProduto;
     baseICMSTotal += baseICMS;
     valorICMSTotal += valorICMS;
     ICMSProprioTotal += ICMSProprio;
@@ -97,11 +96,11 @@ btnCalculate.onclick = () => {
   divRoot.innerHTML = `
     <ul class="result">
       <li>
-        <span>Valor total dos produtos:</span>
-        <span>${valorProdutosTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+        <span>Base de cálculo ICMS:</span>
+        <span>${bcProdutosTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
       </li>
       <li>
-        <span>Base ICMS:</span>
+        <span>Base de cálculo ICMS-ST:</span>
         <span>${baseICMSTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
       </li>
       <li>
